@@ -9,11 +9,6 @@ const ARROW_OFFSET := 5
 @onready var arrow = $Arrow
 @onready var stats_ui = $StatsUI
 
-func _ready() -> void:
-	await get_tree().create_timer(2).timeout
-	take_damage(6)
-	stats.block += 8
-
 
 func set_enemy_stats(value: Stats) -> void:
 	stats = value.create_instance()
@@ -47,3 +42,11 @@ func take_damage(damage: int) -> void:
 	
 	if stats.health <= 0:
 		queue_free()
+
+
+func _on_area_entered(area):
+	arrow.show()
+
+
+func _on_area_exited(area):
+	arrow.hide()
